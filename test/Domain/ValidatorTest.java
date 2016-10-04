@@ -36,11 +36,11 @@ public class ValidatorTest {
         Assert.assertFalse(new Validator().validateArgumentType(new String[] { "test" }));
     }
     
-    @Test
+    /*@Test
     public void ifArgumentLengthAndArgumentTypeIsCorrect(){
         Validator mockValidator = mock(Validator.class);
         when(mockValidator.validateNumberOfArguments(any(String[].class))).thenReturn(true);
         when(mockValidator.validateArgumentType(any(String[].class))).thenReturn(true);
         when(mockValidator.validateArguments(any(String[].class))).thenReturn(true);
-    }
+    }*/
 }
