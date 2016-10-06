@@ -15,13 +15,15 @@ public class CitySim9002 {
     public static String errorMessage = "Please enter one integer argument, seed";
     public static String[] location = {"The Cathedral of Learning", "Squirrel Hill", "The Point", "Downtown", "has left the city"};
     
+    //Method for each visitor to visit locations. Returns array of string for the main to print
     public static String[] travelCity(Visitor sb, int seed2, int j){
         ArrayList<String> al = new ArrayList<String>();
         Random r = new Random(seed2);
-        boolean firstVisit = true;
-        boolean stay = true;
+        boolean firstVisit = true;   //flag for first visit (can't leave city)
+        boolean stay = true; //flag if RNG hasn't made the visitor leave
         while(stay){
             if(firstVisit){
+                //visitor cannot leave city
                 String visitLocation = location[r.nextInt(4)];
                 al.add("Visitor "+j+" is going to "+visitLocation+".");
                 boolean like = sb.getPreference(visitLocation);
@@ -34,6 +36,7 @@ public class CitySim9002 {
             }else{
                 int a = r.nextInt(5);
                 String visitLocation = location[a];
+                //if a==4 then leave city and return string array
                 if(a==4){
                     al.add("Visitor "+j+" "+visitLocation+".");                 
                     stay = false;
@@ -53,29 +56,34 @@ public class CitySim9002 {
         return s;
     }
     
+    //return args[0] argument as an integer for the RNG
     public static int generateSeed(String a){
         int b = Integer.parseInt(a);
         return b;
     }
     
     public static void main(String[] args) {
+        //check if argument is valid
         if (new Validator().validateArguments(args)) {
             int seed = generateSeed(args[0]);
+            //Print out first line
             System.out.println("Welcome to CitySim! Your seed is "+seed+".");
             Random rseed = new Random(seed);
+            //Five visitors in total
             for(int i=1;i<=5;i++){
                 Visitor v = new Visitor();
-                v.setVisitorType(rseed.nextInt(4));
+                v.setVisitorType(rseed.nextInt(4)); //type of visitor is random
                 System.out.println("Visitor "+i+" is "+v.getVisitorType()+".");
-                String[] str = travelCity(v, seed, i);
+                String[] str = travelCity(v, seed, i); //let visitor travel city
                 for(String sentence : str){
                     System.out.println(sentence);
                 }
-                System.out.println("***");
+                System.out.println("***"); //end of one visitor
             }          
             System.exit(0);
         }
         else {
+            //if argument not valid throw error message
             System.out.println(errorMessage);
             System.exit(1);
         }
