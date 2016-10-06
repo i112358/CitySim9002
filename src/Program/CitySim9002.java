@@ -15,8 +15,9 @@ public class CitySim9002 {
     public static String errorMessage = "Please enter one integer argument, seed";
     public static String[] location = {"The Cathedral of Learning", "Squirrel Hill", "The Point", "Downtown", "has left the city"};
     
-    public static String[] travelCity(Visitor sb, Random r, int j){
+    public static String[] travelCity(Visitor sb, int seed2, int j){
         ArrayList<String> al = new ArrayList<String>();
+        Random r = new Random(seed2);
         boolean firstVisit = true;
         boolean stay = true;
         while(stay){
@@ -66,7 +67,7 @@ public class CitySim9002 {
                 Visitor v = new Visitor();
                 v.setVisitorType(rseed.nextInt(4));
                 System.out.println("Visitor "+i+" is "+v.getVisitorType()+".");
-                String[] str = travelCity(v, rseed, i);
+                String[] str = travelCity(v, seed, i);
                 for(String sentence : str){
                     System.out.println(sentence);
                 }
