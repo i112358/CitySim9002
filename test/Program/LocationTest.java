@@ -20,9 +20,6 @@ import static org.mockito.Mockito.when;
  * @author Rachel
  */
 public class LocationTest {
-    @Mock
-    Location mockLocation = mock(Location.class);
-    
     //test that getLocation function returns a location
     @Test
     public void testGetLocation(){

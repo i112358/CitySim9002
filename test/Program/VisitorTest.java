@@ -28,6 +28,7 @@ public class VisitorTest {
         assertEquals("a Student", v.getVisitorType());
     }
     
+    //student should like downtown
     @Test
     public void testGetPreference(){
         Visitor v = new Visitor();
@@ -35,6 +36,7 @@ public class VisitorTest {
         assertTrue(v.getPreference("Downtown"));
     }
     
+    //student should dislike the cathedral of learning
     @Test
     public void testGetPreference2(){
         Visitor v = new Visitor();
