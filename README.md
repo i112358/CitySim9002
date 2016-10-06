@@ -4,9 +4,11 @@ In this project, I wrote a total of 10 tests.
 For each class I constructed a test class that tested the methods of that class.
 
 For the class CitySim9002, I used the test class "CitySimTest".
+
 First, it tested the method "generateSeed" which was used to return the argument passed to the program as an integer.
 I used two test cases to test this method, when the argument had only one character and when it had more then one character.
 This is a happy path testing because the program already had a validator that filtered entries that were not parsible.
+
 Then, it tested the method "travelCity" that returns an array of strings indicating where the visitor is going and whether they like the location, and the last string should say the visitor has left the city.
 This method was difficult to test, because it had some amount of randomness, and I had trouble determining what the method returned.
 For example, I tried using a stub for the Random.nextInt() method, which didn't work, and I also seperated the location into a different instance class for this.
