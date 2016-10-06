@@ -13,18 +13,17 @@ import java.util.*;
  */
 public class CitySim9002 {
     public static String errorMessage = "Please enter one integer argument, seed";
-    public static String[] location = {"The Cathedral of Learning", "Squirrel Hill", "The Point", "Downtown", "has left the city"};
-    
+
     //Method for each visitor to visit locations. Returns array of string for the main to print
-    public static String[] travelCity(Visitor sb, int seed2, int j){
+    public static String[] travelCity(Visitor sb, Random r, int j){
         ArrayList<String> al = new ArrayList<String>();
-        Random r = new Random(seed2);
         boolean firstVisit = true;   //flag for first visit (can't leave city)
         boolean stay = true; //flag if RNG hasn't made the visitor leave
         while(stay){
             if(firstVisit){
                 //visitor cannot leave city
-                String visitLocation = location[r.nextInt(4)];
+                Location l = new Location();
+                String visitLocation = l.getLocation(r, 4);
                 al.add("Visitor "+j+" is going to "+visitLocation+".");
                 boolean like = sb.getPreference(visitLocation);
                 if(like){
@@ -34,10 +33,9 @@ public class CitySim9002 {
                 }
                 firstVisit = false;
             }else{
-                int a = r.nextInt(5);
-                String visitLocation = location[a];
-                //if a==4 then leave city and return string array
-                if(a==4){
+                Location l = new Location();
+                String visitLocation = l.getLocation(r, 5);
+                if(visitLocation.matches("has left the city")){
                     al.add("Visitor "+j+" "+visitLocation+".");                 
                     stay = false;
                     break;
@@ -74,7 +72,7 @@ public class CitySim9002 {
                 Visitor v = new Visitor();
                 v.setVisitorType(rseed.nextInt(4)); //type of visitor is random
                 System.out.println("Visitor "+i+" is "+v.getVisitorType()+".");
-                String[] str = travelCity(v, seed, i); //let visitor travel city
+                String[] str = travelCity(v, rseed, i); //let visitor travel city
                 for(String sentence : str){
                     System.out.println(sentence);
                 }

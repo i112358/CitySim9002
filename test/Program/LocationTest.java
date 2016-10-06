@@ -15,30 +15,19 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
 /**
  *
  * @author Rachel
  */
-public class VisitorTest {
-    @Test
-    public void testGetVisitorType(){
-        Visitor v = new Visitor();
-        v.setVisitorType(0);
-        assertEquals("a Student", v.getVisitorType());
-    }
+public class LocationTest {
+    @Mock
+    Location mockLocation = mock(Location.class);
     
+    //test that getLocation function returns a location
     @Test
-    public void testGetPreference(){
-        Visitor v = new Visitor();
-        v.setVisitorType(0);
-        assertTrue(v.getPreference("Downtown"));
-    }
-    
-    @Test
-    public void testGetPreference2(){
-        Visitor v = new Visitor();
-        v.setVisitorType(0);
-        assertFalse(v.getPreference("The Cathedral of Learning"));
+    public void testGetLocation(){
+        Location l = new Location();
+        Random rn = new Random(5);
+        assertEquals("The Point",l.getLocation(rn, 4));
     }
 }

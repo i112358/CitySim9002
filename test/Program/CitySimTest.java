@@ -24,6 +24,8 @@ public class CitySimTest {
     @Mock
     Visitor mockVisitor = Mockito.mock(Visitor.class);
     CitySim9002 mockCitySim = Mockito.mock(CitySim9002.class);
+    Location mockLocation = Mockito.mock(Location.class);
+    Random mockRandom = mock(Random.class);
     
     //A string element should return as an integer
     //one character
@@ -48,42 +50,43 @@ public class CitySimTest {
         Visitor testV = new Visitor();
         CitySim9002 testCity = new CitySim9002();
         testV.setVisitorType(0);
-        String[] output = testCity.travelCity(testV,5,1);
+        Random r = new Random(5);
+        String[] output = testCity.travelCity(testV,r,1);
         assertTrue(output.length >= 3);
     }
     
-    //The first element of travelCity should be a string starting with "Visitor 1 is going to "
+    //The first element of travelCity should be a string starting with "Visitor 1 is going to Point."
     @Test
     public void testTravelCity2(){
-        String input = "The Cathedral of Learning";
         Visitor testV = new Visitor();
         CitySim9002 testCity = new CitySim9002();
         testV.setVisitorType(0);
-        String[] output = testCity.travelCity(testV,5,1);
-        assertTrue(output[0].matches("Visitor 1 is going to (.*)"));
+        Random r = new Random(5);
+        String[] output = testCity.travelCity(testV,r,1);
+        assertEquals("Visitor 1 is going to The Point.",output[0]);
     }
     
     //The secont element of travelCity should be a string starting with "Visitor 1 did like "
     @Test
     public void testTravelCity3(){
-        String input = "The Cathedral of Learning";
+        String input = "The Point";
         Visitor testV = new Visitor();
         CitySim9002 testCity = new CitySim9002();
         testV.setVisitorType(0);
         when(mockVisitor.getPreference(input)).thenReturn(true);
-        String[] output = testCity.travelCity(testV,5,1);
-        assertTrue(output[1].matches("Visitor 1 did like (.*)"));
+        Random r = new Random(5);
+        String[] output = testCity.travelCity(testV,r,1);
+        assertEquals("Visitor 1 did like The Point.",output[1]);
     }
     
     //The last element of travelCity should be a string saying "Visitor 1 has left the city."
     @Test
     public void testTravelCity4(){
-        String input = "The Cathedral of Learning";
         Visitor testV = new Visitor();
         CitySim9002 testCity = new CitySim9002();
         testV.setVisitorType(0);
-        when(mockVisitor.getPreference(input)).thenReturn(true);
-        String[] output = testCity.travelCity(testV,5,1);
+        Random r = new Random(5);
+        String[] output = testCity.travelCity(testV,r,1);
         assertTrue(output[output.length-1].matches("Visitor 1 has left the city."));
     }
 }
